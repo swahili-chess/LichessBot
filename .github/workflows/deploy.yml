@@ -1,0 +1,31 @@
+name: scp files
+on: [push]
+jobs:
+ 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "*"
+        target: "/home/${{ secrets.USERNAME }}/lichessBot"
+    - name: Install Dependencies 
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+            cd /home/${{ secrets.USERNAME }}/lichessBot
+            echo ${{ secrets.PASSWORD }} | sudo -S systemctl stop lichessBot.service
+            npm install
+            echo ${{ secrets.PASSWORD }} | sudo -S systemctl start lichessBot.service
+            echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx
