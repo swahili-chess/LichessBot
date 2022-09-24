@@ -1,11 +1,15 @@
 import { fetchTeamUsers } from "./fetchTeamUsers.mjs";
 const gamesObj = {};
 
-fetchTeamUsers().then(resUserList => {
-   for (let user of resUserList) {
-     gamesObj[user.toLowerCase()] = [];
-   }
+try {
+  const resUserList = await fetchTeamUsers();
+  for (let user of resUserList) {
+    gamesObj[user.toLowerCase()] = [];
+  }
+} catch (error) {
+  console.log(error);
+}
+
  
-})
 
 export { gamesObj };

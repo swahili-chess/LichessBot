@@ -5,6 +5,7 @@ const headers = {
 };
 
 export async function fetchUSerStatus(users) {
+  console.log(`i entered fetchuserStatus`);
   let url = "https://lichess.org/api/users/status?ids=";
   let fullUrl = url.concat(users.join().toLowerCase());
   const response = await fetch(fullUrl, { headers });
@@ -15,14 +16,19 @@ export async function fetchUSerStatus(users) {
     await fetchUSerStatus(users);
   } else if (response.status !== 200) {
     // Show the message and reconnect after  1 minute
-    showResult(response.statusText);
+
     await new Promise((resolve) => setTimeout(resolve, 60000));
     await fetchUSerStatus(users);
   } else {
     // Accept the Json
     const usersStatusRes = await response.json();
-    //showResult(message);
-    getLinkGames(usersStatusRes);
+
+    try {
+      await getLinkGames(usersStatusRes);
+    } catch (error) {
+      console.log(error);
+    }
+
     await new Promise((resolve) => setTimeout(resolve, 6000));
     await fetchUSerStatus(users);
   }

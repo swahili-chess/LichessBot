@@ -8,7 +8,7 @@ export async function checkFileExists(path) {
         return !res;
     }
     catch (error) {
+        console.log("checkfileisExist", error);
         return false
     }
 }
-

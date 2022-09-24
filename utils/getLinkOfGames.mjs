@@ -10,6 +10,7 @@ const headers = {
 };
 
 export async function getLinkGames(usersStatusRes) {
+  console.log(`i entered getLinkGames`);
   for (let userObj of usersStatusRes) {
     if (userObj["playing"] && userObj["online"]) {
       let getGameUrl = `https://lichess.org/api/user/${userObj["id"]}/current-game?moves=false&pgnInJson=true&clocks=false&evals=false&opening=false`;
@@ -25,15 +26,18 @@ export async function getLinkGames(usersStatusRes) {
         if (arrayOfGames.length === 0) {
           arrayOfGames.push(currentGameUrl);
           gamesObj[userObj["id"]] = arrayOfGames;
+          try {
+            let userIds = await readFileReturnIds(pathToJSon);
 
-          let userIds = await readFileReturnIds(pathToJSon);
-
-          for (let id of userIds) {
-            try {
-              await sendLinkMessage(id, currentGameUrl);
-            } catch (error) {
-              console.log(error);
+            for (let id of userIds) {
+              try {
+                await sendLinkMessage(id, currentGameUrl);
+              } catch (error) {
+                console.log(error);
+              }
             }
+          } catch (error) {
+            console.log(error);
           }
         } else {
           let lastGameUrl = arrayOfGames[arrayOfGames.length - 1];
@@ -41,14 +45,17 @@ export async function getLinkGames(usersStatusRes) {
           if (lastGameUrl != currentGameUrl) {
             arrayOfGames.push(currentGameUrl);
             gamesObj[userObj["id"]] = arrayOfGames;
-
-            userIds = await readFileReturnIds(pathToJSon);
-            for (let id of userIds) {
-              try {
-                await sendLinkMessage(id, currentGameUrl);
-              } catch (error) {
-                console.log(error);
+            try {
+              userIds = await readFileReturnIds(pathToJSon);
+              for (let id of userIds) {
+                try {
+                  await sendLinkMessage(id, currentGameUrl);
+                } catch (error) {
+                  console.log(error);
+                }
               }
+            } catch (error) {
+              console.log(error);
             }
           }
         }

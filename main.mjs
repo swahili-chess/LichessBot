@@ -6,16 +6,13 @@ import { writeFileJson } from "./utils/writeFileJson.mjs";
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-bot.start(async (ctx) => {
+bot.start((ctx, err) => {
   let message = `Please use this bot to get status of Nyumbani mates team members that are online on Lichess`;
-
-  ctx.reply(message);
-  try {
-    const newLocal = await writeFileJson(ctx.chat.id);
-    console.log(newLocal);
-  } catch (error) {
-    console.log(error);
+  if (err) {
+    console.log(err);
   }
+  ctx.reply(message);
+  writeFileJson(ctx.chat.id)
 });
 
 let users = await fetchTeamUsers();

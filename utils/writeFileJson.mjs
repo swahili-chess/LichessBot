@@ -8,14 +8,22 @@ const file = "userId.json";
 export const pathToJSon = path.join(__dirname, file);
 
 export async function writeFileJson(id) {
-  // Check if the file exists in the current directory.
-  console.log("path writefilejson", pathToJSon);
+
+
   const isExist = await checkFileExists(pathToJSon);
   if (isExist) {
-    await readAddIds(id, pathToJSon);
-    return `done readAddIds,${pathToJSon}`;
+    try {
+      await readAddIds(id, pathToJSon);
+      console.log(`done readAddIds,${pathToJSon}`);
+    } catch (error) {
+      console.log(error);
+    }
   } else {
-    await createAddId(id, pathToJSon);
-    return "done createAddIds";
+    try {
+      await createAddId(id, pathToJSon);
+      console.log("done createAddIds");
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
