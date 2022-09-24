@@ -1,0 +1,21 @@
+{
+  "name": "lichessbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "mongoose": "^6.6.1",
+    "node-fetch": "^3.2.10",
+    "telegraf": "^4.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
