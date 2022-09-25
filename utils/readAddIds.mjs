@@ -9,7 +9,7 @@ export async function readAddIds(id, pathToJSon) {
       idsObj["userId"].push(id);
       await fsp.writeFile(pathToJSon, JSON.stringify(idsObj));
     }
-  } catch (error) {
-    console.log("Faiulre read or write", error);
+  } catch (e) {
+    console.log("Error in reading file", e);
   }
 }

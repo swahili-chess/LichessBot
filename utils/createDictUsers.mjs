@@ -6,8 +6,8 @@ try {
   for (let user of resUserList) {
     gamesObj[user.toLowerCase()] = [];
   }
-} catch (error) {
-  console.log(error);
+} catch (e) {
+  console.log("Error creating a dict of users",e);
 }
 
  

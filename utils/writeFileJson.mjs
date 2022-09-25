@@ -11,19 +11,18 @@ export async function writeFileJson(id) {
 
 
   const isExist = await checkFileExists(pathToJSon);
+
   if (isExist) {
     try {
       await readAddIds(id, pathToJSon);
-      console.log(`done readAddIds,${pathToJSon}`);
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      console.log("Error in read and adding ids", e);
     }
   } else {
     try {
       await createAddId(id, pathToJSon);
-      console.log("done createAddIds");
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      console.log("Error in creating and adding ids", e);
     }
   }
 }
