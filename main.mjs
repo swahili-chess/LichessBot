@@ -16,6 +16,6 @@ bot.start((ctx, err) => {
 });
 
 let users = await fetchTeamUsers();
-await fetchUserSendLink(users);
+fetchUserSendLink(users);
 
 bot.launch();

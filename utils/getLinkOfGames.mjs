@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { gamesObj } from "./createDictUsers.mjs";
 import { pathToJSon } from "./writeFileJson.mjs";
 import { readFileReturnIds } from "./readFileReturnIds.mjs";
-import { sendLinkMessage } from "./sendLinkMessage.mjs";
+import { sendMessageToIds } from "./sendMessageToIds.mjs";
 let userIds;
 const headers = {
   Authorization: "Bearer " + process.env.LICHESS_TOKEN,
@@ -21,20 +21,51 @@ export async function getLinkGames(usersStatusRes) {
           .split(" ")[1]
           .replace(/['"]+/g, "");
 
+        const otherPlayerBlack = resText
+          .split("]")[4]
+          .split(" ")[1]
+          .replace(/['"]+/g, "")
+          .toLowerCase();
+
+        const otherPlayerWhite = resText
+          .split("]")[3]
+          .split(" ")[1]
+          .replace(/['"]+/g, "")
+          .toLowerCase();
+
         let arrayOfGames = gamesObj[userObj["id"]];
-        if (arrayOfGames.length === 0) {
+
+        const otherOppent =
+          userObj["id"] == otherPlayerBlack
+            ? otherPlayerWhite
+            : otherPlayerBlack;
+        if (otherOppent in gamesObj) {
+          let otherOpponentArray = gamesObj[otherOppent];
+
+          if (
+            !(
+              arrayOfGames.includes(currentGameUrl) &&
+              otherOpponentArray.includes(currentGameUrl)
+            )
+          ) {
+            arrayOfGames.push(currentGameUrl);
+            otherOpponentArray.push(currentGameUrl);
+            gamesObj[userObj["id"]] = arrayOfGames;
+            gamesObj[otherOppent] = otherOpponentArray;
+
+            try {
+              userIds = await readFileReturnIds(pathToJSon);
+              sendMessageToIds(userIds, currentGameUrl);
+            } catch (e) {
+              console.log("Error in reading files and return ids", e);
+            }
+          }
+        } else if (arrayOfGames.length === 0) {
           arrayOfGames.push(currentGameUrl);
           gamesObj[userObj["id"]] = arrayOfGames;
           try {
             userIds = await readFileReturnIds(pathToJSon);
-
-            for (let id of userIds) {
-              try {
-                await sendLinkMessage(id, currentGameUrl);
-              } catch (e) {
-                console.log("Error in sending message", e);
-              }
-            }
+            sendMessageToIds(userIds, currentGameUrl);
           } catch (e) {
             console.log("Error in reading files and return ids", e);
           }
@@ -46,13 +77,7 @@ export async function getLinkGames(usersStatusRes) {
             gamesObj[userObj["id"]] = arrayOfGames;
             try {
               userIds = await readFileReturnIds(pathToJSon);
-              for (let id of userIds) {
-                try {
-                  await sendLinkMessage(id, currentGameUrl);
-                } catch (e) {
-                  console.log("Error fetching the game link", e);
-                }
-              }
+              sendMessageToIds(userIds, currentGameUrl);
             } catch (e) {
               console.log("Error in reading files and return ids", e);
             }
