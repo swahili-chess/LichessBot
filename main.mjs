@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import { fetchTeamUsers } from "./utils/fetchTeamUsers.mjs";
 import { fetchUserSendLink } from "./utils/fetchUserSendLink.mjs";
 import { writeFileJson } from "./utils/writeFileJson.mjs";
+import {users} from "./utils/createDictUsers.mjs"
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -15,7 +16,6 @@ bot.start((ctx, err) => {
   writeFileJson(ctx.chat.id)
 });
 
-let users = await fetchTeamUsers();
 fetchUserSendLink(users);
 
 bot.launch();
