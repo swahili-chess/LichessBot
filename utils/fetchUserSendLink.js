@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { fetchUSerStatus } from "./fetchUserStatus.mjs";
+import { fetchUSerStatus } from "./fetchUserStatus.js";
 
 export async function fetchUserSendLink(users) {
   try {

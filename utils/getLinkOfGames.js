@@ -1,9 +1,9 @@
 import fetch from "node-fetch";
 
-import { gamesObj } from "./createDictUsers.mjs";
-import { pathToJSon } from "./writeFileJson.mjs";
-import { readFileReturnIds } from "./readFileReturnIds.mjs";
-import { sendMessageToIds } from "./sendMessageToIds.mjs";
+import { gamesObj } from "./createDictUsers.js";
+import { pathToJSon } from "./writeFileJson.js";
+import { readFileReturnIds } from "./readFileReturnIds.js";
+import { sendMessageToIds } from "./sendMessageToIds.js";
 let userIds;
 const headers = {
   Authorization: "Bearer " + process.env.LICHESS_TOKEN,

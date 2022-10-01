@@ -1,9 +1,9 @@
 import { Telegraf } from "telegraf";
 import * as dotenv from "dotenv";
-import { fetchTeamUsers } from "./utils/fetchTeamUsers.mjs";
-import { fetchUserSendLink } from "./utils/fetchUserSendLink.mjs";
-import { writeFileJson } from "./utils/writeFileJson.mjs";
-import {users} from "./utils/createDictUsers.mjs"
+import { fetchTeamUsers } from "./utils/fetchTeamUsers.js";
+import { fetchUserSendLink } from "./utils/fetchUserSendLink.js";
+import { writeFileJson } from "./utils/writeFileJson.js";
+import {users} from "./utils/createDictUsers.js"
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 

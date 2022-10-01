@@ -1,7 +1,7 @@
 import path from "path";
-import { checkFileExists } from "./checkFileExist.mjs";
-import { readAddIds } from "./readAddIds.mjs";
-import { createAddId } from "./createAddId.mjs";
+import { checkFileExists } from "./checkFileExist.js";
+import { readAddIds } from "./readAddIds.js";
+import { createAddId } from "./createAddId.js";
 
 const __dirname = path.resolve();
 const file = "userId.json";

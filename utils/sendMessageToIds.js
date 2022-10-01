@@ -1,4 +1,4 @@
-import { sendLinkMessage } from "./sendLinkMessage.mjs";
+import { sendLinkMessage } from "./sendLinkMessage.js";
 
 export async function sendMessageToIds(userIds,currentGameUrl) {
   for (let id of userIds) {

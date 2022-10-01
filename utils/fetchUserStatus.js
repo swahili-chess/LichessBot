@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { getLinkGames } from "./getLinkOfGames.mjs";
+import { getLinkGames } from "./getLinkOfGames.js";
 const headers = {
   Authorization: "Bearer " + process.env.LICHESS_TOKEN,
 };

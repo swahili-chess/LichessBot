@@ -1,4 +1,4 @@
-import { fetchTeamUsers } from "./fetchTeamUsers.mjs";
+import { fetchTeamUsers } from "./fetchTeamUsers.js";
 const gamesObj = {};
 let users;
 
