@@ -1,6 +1,5 @@
 import { Telegraf } from "telegraf";
 import * as dotenv from "dotenv";
-import { fetchTeamUsers } from "./utils/fetchTeamUsers.js";
 import { fetchUserSendLink } from "./utils/fetchUserSendLink.js";
 import { writeFileJson } from "./utils/writeFileJson.js";
 import {users} from "./utils/createDictUsers.js"
