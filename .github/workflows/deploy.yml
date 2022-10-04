@@ -28,4 +28,3 @@ jobs:
             echo ${{ secrets.PASSWORD }} | sudo -S systemctl stop lichessBot.service
             npm install
             echo ${{ secrets.PASSWORD }} | sudo -S systemctl start lichessBot.service
-            echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx
