@@ -22,7 +22,7 @@ bot.start(async(ctx) => {
 
 
 
-bot.command('/stop', async (ctx) => {
+bot.command('stop', async (ctx) => {
     try {
        
       removeFileJson(ctx.chat.id)
