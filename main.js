@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 import { fetchUserSendLink } from "./utils/fetchUserSendLink.js";
 import { writeFileJson } from "./utils/writeFileJson.js";
 import { users } from "./utils/createDictUsers.js"
-import {removeFileJson} from "./utils/removeFileJson"
+import {removeFileJson} from "./utils/removeFileJson.js"
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
