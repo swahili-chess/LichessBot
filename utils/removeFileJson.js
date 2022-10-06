@@ -19,7 +19,7 @@ export async function removeFileJson(id) {
     try {
        const res = await fsp.readFile(pathToJSon, "utf8");
        const idsObj = JSON.parse(res);
-       if (!idsObj["userId"].includes(id)) {
+       if (idsObj["userId"].includes(id)) {
           const newArray = removeItemOnce(idsObj["userId"], id);
           idsObj["userId"]=newArray
           await fsp.writeFile(pathToJSon, JSON.stringify(idsObj));
