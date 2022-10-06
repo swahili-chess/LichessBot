@@ -5,7 +5,7 @@ export async function sendMessageToIds(userIds,currentGameUrl) {
     try {
       await sendLinkMessage(id, currentGameUrl);
     } catch (e) {
-      console.log("Error fetching the game link", e);
+      console.log("Error Sending the game link", e);
     }
   }
 }
