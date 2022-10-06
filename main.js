@@ -35,6 +35,6 @@ bot.command("stop", async (ctx) => {
 });
 
 
-//fetchUserSendLink(users);
+fetchUserSendLink(users);
 
 bot.launch();
