@@ -22,10 +22,13 @@ export async function removeFileJson(id) {
        if (idsObj["userId"].includes(id)) {
           const newArray = removeItemOnce(idsObj["userId"], id);
           idsObj["userId"]=newArray
-          await fsp.writeFile(pathToJSon, JSON.stringify(idsObj));
-       }
+           await fsp.writeFile(pathToJSon, JSON.stringify(idsObj));
+           return true
+        
+        }
+       return false;
      } catch (e) {
-        console.log("Error in deleting userId file", e);
+        return false
      }
 
     
