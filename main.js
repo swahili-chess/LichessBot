@@ -35,10 +35,10 @@ bot.command("stop", async (ctx) => {
 });
 
 
-bot.command("users", async (ctx) => {
+bot.command("team", async (ctx) => {
 
       ctx.reply(
-        `You have ${users.length} subscribers only`
+        `You have ${users.length} members in a nyumbani mates`
       );
   
 
