@@ -35,6 +35,16 @@ bot.command("stop", async (ctx) => {
 });
 
 
+bot.command("users", async (ctx) => {
+
+      ctx.reply(
+        `You have ${users.length} subscribers only`
+      );
+  
+
+});
+
+
 fetchUserSendLink(users);
 
 bot.launch();
