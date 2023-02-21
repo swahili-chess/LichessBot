@@ -7,22 +7,27 @@ const headers = {
 };
 
 export async function fetchTeamUsers() {
-  const res = await fetch("https://lichess.org/api/team/nyumbani-mates/users", {
-    headers,
-  });
+  try {
+    const res = await fetch("https://lichess.org/api/team/nyumbani-mates/users", {
+      headers,
+    });
 
-  const resjson = await res.text();
+    const resjson = await res.text();
 
-  let results = resjson.split("\n");
+    let results = resjson.split("\n");
 
-  results = results.slice(0, results.length - 1);
+    results = results.slice(0, results.length - 1);
 
-  const userIdArray = [];
+    const userIdArray = [];
 
-  for (let resObj of results) {
-    let parsedOBj = JSON.parse(resObj);
-    userIdArray.push(parsedOBj["id"]);
+    for (let resObj of results) {
+      let parsedOBj = JSON.parse(resObj);
+      userIdArray.push(parsedOBj["id"]);
+    }
+
+    return userIdArray;
+  } catch (error) {
+    console.error("Error fetching team users:", error);
+    process.exit(1);
   }
-
-  return userIdArray;
 }
