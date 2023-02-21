@@ -6,5 +6,6 @@ export async function fetchUserSendLink(users) {
     await fetchUSerStatus(users);
   } catch (e) {
     console.log("Error in fetching users", e);
+    process.exit(1)
   }
 }
